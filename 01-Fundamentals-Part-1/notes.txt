@@ -1,0 +1,21 @@
+Dynamic Typing :  C’est la valeur qui a un TYPE, et non la variable.
+Les variables stockent des valeurs qui ont un type.
+
+---------------
+Let, Const, Var
+---------------
+
+Const => Obligé de la déclarer
+Var = ne jamais utiliser
+
+*** Bonne pratique ***
+    Toujours utiliser Const, de base
+    Et modifier quand on sait que la valeur sera modifiée par la suite
+***********************
+
+---------------
+Basic Operators
+---------------
+
+x += 10
+     //x = x + 10
