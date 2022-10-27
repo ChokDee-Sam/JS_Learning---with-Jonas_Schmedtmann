@@ -19,3 +19,23 @@ Basic Operators
 
 x += 10
      //x = x + 10
+
+
+---------------
+Type Conversion
+---------------
+
+Conversion en 3 types :
+- string
+- number
+- boolean
+
+Conversion momentanée
+(Number(year)) 
+
+
+---------------
+Type Coercion
+---------------
+
+Lorsque 2 types se rencontrent
