@@ -78,7 +78,8 @@ console.log(age1, age2);
 //------------------------------------------------------------
 
 // Plus courte à écrire
-// Pas besoin de return (return automatiquement si 1 ligne)
+// Pas besoin d'écrire Function
+// Pas besoin d'écrire Return (return automatiquement si 1 ligne : penser Ternaire)
 
 // birthYear => 2022 - birthday
 // on la stock dans une variable
