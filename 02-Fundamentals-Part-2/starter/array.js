@@ -6,7 +6,7 @@ const friend3 = "Youssef";
 // Création d'un tableau
 // ---------------------------------------------------------
 
-const friends = ["Mehdi", "Sebastien", "Youssef"];
+const friends = ["Mehdi", "Sebastien", "Youssef", "Armando"];
 console.log(friends);
 
 // ---------------------------------------------------------
@@ -105,16 +105,88 @@ console.log(meetSebastien);
 console.log(meetYoussef);
 
 // On peut maintenant créer un tableau du resultat de chacun
-let friendshipArray = [meetMehdi, meetSebastien, meetYoussef]
+let friendshipArray = [meetMehdi, meetSebastien, meetYoussef];
 console.log(friendshipArray);
 
 // Ou bien de manière moins propre, mais pour l'exemple
 friendshipArray = [
     `Je connais Mehdi depuis ${calcAgeFriensdship(yearsNewFriend[1])} ans `,
     meetSebastien,
-    calcAgeFriensdship(yearsNewFriend[1])+'an',
+    calcAgeFriensdship(yearsNewFriend[1]) + "an",
 ];
 
 console.log(friendshipArray);
+
 // ---------------------------------------------------------
 // ---------------------------------------------------------
+// BASIC ARRAY OPERATIONS
+// ---------------------------------------------------------
+// ---------------------------------------------------------
+
+// On va voir divers Method qui s'appliquent aux Tableaux
+// Une Method est techniquement des fonctions
+// Et nous appelons cette fonction direction sur le tableau
+
+// ----------------------
+// Ajout d'element en fin de tableau (.push)
+// ----------------------
+// Method pour ajouter un élement dans le tableau
+console.log(friends);
+
+const newLenght = friends.push("Me");
+// Permet d'afficher non pas ce qui a été rajouté
+// mais le résultat de cette fonction(method) avec un Return
+console.log(newLenght);
+console.log(friends);
+
+// ----------------------
+// Ajout d'element en début de tableau (.unshift)
+// ----------------------
+const newLenght2 = friends.unshift("Mathias");
+console.log(friends);
+console.log(newLenght2);
+// Return le résultat de cette fonction
+
+// ----------------------
+// Supression d'element en début de tableau (.shift)
+// ----------------------
+friends.shift();
+console.log(friends);
+
+// ----------------------
+// Suppression d'element en fin de tableau (.pop)
+// ----------------------
+friends.pop(); //pas besoin d'arguments
+console.log(friends);
+const popped = friends.pop();
+console.log(popped); //affiche la suppression
+console.log(friends);
+
+// ----------------------
+// ----------------------
+// Affichage de la position d'un élément dans un tableau  (.indexOf)
+// ----------------------
+console.log(friends.indexOf("Sebastien"));
+
+// ----------------------
+// Savoir si un élément est présent dans un tableau (.includes)
+// ----------------------
+console.log(friends.includes("Habi"));
+console.log(friends.includes("Youssef"));
+
+// ----------------------
+// Egalité stricte avec la Method .push + .includes
+// ----------------------
+
+friends.push(100); // on ajoute un type Number
+console.log(friends);
+console.log(friends.includes("100")); // on demande un type String
+// La Coerciciton ne s'applique pas !!
+
+// ----------------------
+// Use Case de la Methode .includes
+// ----------------------
+
+if (friends.includes("Mehdi Garti")) {
+    console.log(`Tu as un ami qui se nomme Mehdi Garti`);
+}
