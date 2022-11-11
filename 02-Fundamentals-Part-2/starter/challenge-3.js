@@ -42,3 +42,29 @@ if (Marks.BMI > John.BMI) {
         `v1 : ${John.firstName} ${John.lastName}'s BMI (${John.BMI}) is higher than ${Marks.firstName}'s (${Marks.BMI})`
     );
 }
+
+// 
+// 
+// -------------------------------------------------------------------
+// 
+// Ma Solution 2 
+// Tout dans une fonction, à l'intérieur d'une variable
+
+//      On crée une variable, contenant notre fonction avec 2 paramètres
+//      On call notre Method qui créée un paramètre dans les 2 objects extérieurs
+//      On appelle notre fonction avec les 2 paramètres(issus des objets) dans une variable qui sauvegarde les résultats
+let compareBMI = (firstBMI, secondBMI) => {
+    Marks.calcBMI();
+    John.calcBMI();
+    if (firstBMI > secondBMI) {
+        console.log(
+            `v2 : ${Marks.firstName} ${Marks.lastName}'s BMI (${Marks.BMI}) is higher than ${John.firstName}'s (${John.BMI})`
+        );
+    } else {
+        console.log(
+            `v2 : ${John.firstName} ${John.lastName}'s BMI (${John.BMI}) is higher than ${Marks.firstName}'s (${Marks.BMI})`
+        );
+    }
+};
+
+const callBMI = compareBMI(Marks.BMI, John.BMI);
