@@ -138,3 +138,37 @@ for (let serie = 1; serie <= 3; serie++) {
         console.log(`Serie ${serie} : Dancing repetition ${rep} 🤸‍♂️`);
     }
 }
+
+// ---------------------------------------------
+// ---------------------------------------------
+
+// ------------------------//
+// BOUCLE WHILE
+// ------------------------//
+// Quand on ne connait pas le nombre de fois que la boucle sera exécutée
+// Quand on ne connait pas à l'avance combien d'itération la boucle aura
+// Ne dépend pas d'un compteur
+
+// exemple de comparaison : Boucle For
+for (let exemple = 1; exemple <= 5; exemple++) {
+    console.log(`----------  Boucle - FOR :  ${exemple}`);
+}
+
+// Boucle While
+let exemple = 1;
+while (exemple <= 5) {
+    console.log(`----------  Boucle - WHILE :  ${exemple}`);
+    exemple++;
+}
+
+// Exemple de boucle While : lancé de dés
+let dice = Math.trunc(Math.random() * 6) + 1;
+console.log(dice);
+
+while (dice !== 6) {
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1;
+    if (dice === 6) {
+        console.log(`Congratulations ! You rolled a ${dice}`);
+    }
+}
