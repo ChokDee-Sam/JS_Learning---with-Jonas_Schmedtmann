@@ -56,7 +56,6 @@ console.log(newTableau);
 // Autre exemple
 console.log("------ CAPTURER DES INFORMATIONS : EXEMPLE 2 ------");
 
-
 // On crée un tableau avec des dates + un tableau vide
 const years = [1983, 1990, 1998, 2022];
 const age = [];
@@ -91,7 +90,7 @@ for (i = 0; i < Sam.length; i++) {
 console.log("----- CONTINUE ------");
 
 for (i = 0; i < Sam.length; i++) {
-    if (typeof Sam[i] !== 'string') continue;
+    if (typeof Sam[i] !== "string") continue;
     console.log(Sam[i], typeof Sam[i]);
 }
 
@@ -102,7 +101,40 @@ for (i = 0; i < Sam.length; i++) {
 console.log("----- BREAK ------");
 
 for (i = 0; i < Sam.length; i++) {
-    if (typeof Sam[i] === 'number') break;
+    if (typeof Sam[i] === "number") break;
     console.log(Sam[i], typeof Sam[i]);
 }
 
+// ---------------------------------------------
+// ---------------------------------------------
+
+// ------------------------//
+// BOUCLER À L'ENVERS
+// ------------------------//
+
+console.log("------ BOUCLE À L'ENVERS ------");
+
+const Seb = [
+    "Sebastien",
+    "Monnier",
+    1984,
+    "Truck Driver",
+    ["Vincent", "Karim", "Sam"],
+];
+
+for (let i = Seb.length - 1; i >= 0; i--) {
+    console.log(i, Seb[i]);
+}
+
+// ------------------------//
+// BOUCLER DANS UNE BOUCLE
+// ------------------------//
+console.log("------ BOUCLE DANS UNE BOUCLE ------");
+
+for (let serie = 1; serie <= 3; serie++) {
+    console.log(`---------- Starting Serie ${serie}`);
+
+    for (let rep = 1; rep < 6; rep++) {
+        console.log(`Serie ${serie} : Dancing repetition ${rep} 🤸‍♂️`);
+    }
+}
