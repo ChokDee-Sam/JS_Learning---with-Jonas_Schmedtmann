@@ -22,7 +22,7 @@ console.log("------ AFFICHER DES INFORMATIONS ------");
 
 // En démarrant de zéro, on va incrémenter en +1
 // jusqu'à s'arrêter à la fin de la longueur du tableau Sam
-for (i = 0; i < Sam.length; i++) {
+for (let i = 0; i < Sam.length; i++) {
     console.log(Sam[i], typeof Sam[i]);
 }
 // Et l'incrémentation se passe dans le numéro de propriété du tableau
@@ -36,7 +36,7 @@ console.log("------ CAPTURER DES INFORMATIONS : EXEMPLE 1 ------");
 const newTableau = [];
 
 // On reprend le code de la boucle précédente
-for (i = 0; i < Sam.length; i++) {
+for (let i = 0; i < Sam.length; i++) {
     console.log(Sam[i], typeof Sam[i]);
 
     // On va maintenant intégrer une valeur i dans le tableau 'types' vide
@@ -77,7 +77,7 @@ console.log(age);
 // ------------------------//
 console.log("------ CONDITION ------");
 
-for (i = 0; i < Sam.length; i++) {
+for (let i = 0; i < Sam.length; i++) {
     if (typeof Sam[i] === "object") {
         console.log(Sam[i], typeof Sam[i]);
     }
@@ -89,7 +89,7 @@ for (i = 0; i < Sam.length; i++) {
 // ------------------------//
 console.log("----- CONTINUE ------");
 
-for (i = 0; i < Sam.length; i++) {
+for (let i = 0; i < Sam.length; i++) {
     if (typeof Sam[i] !== "string") continue;
     console.log(Sam[i], typeof Sam[i]);
 }
@@ -100,7 +100,7 @@ for (i = 0; i < Sam.length; i++) {
 // ------------------------//
 console.log("----- BREAK ------");
 
-for (i = 0; i < Sam.length; i++) {
+for (let i = 0; i < Sam.length; i++) {
     if (typeof Sam[i] === "number") break;
     console.log(Sam[i], typeof Sam[i]);
 }
