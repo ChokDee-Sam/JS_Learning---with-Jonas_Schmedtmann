@@ -56,6 +56,7 @@ console.log(friends[2]);
 // Un tableau n'est pas une valeur primitive, donc il peut être modifié dans une Const
 // Par contre, il ne peut pas être remplacé entièrement par plusieurs data
 
+// Ici on va rajouter un nom de famille
 friends[0] = "Mehdi Garti";
 console.log(friends);
 

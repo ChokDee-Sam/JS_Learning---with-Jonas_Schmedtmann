@@ -116,7 +116,7 @@ let Sam2 = {
         return 2100 - birthYear;
     },
 
-    // Expression qui va chercher la valeur à l'intérieur de la function
+    // Expression qui va chercher la valeur à l'intérieur de la function, puis de l'objet
     // 'this' va pointer vers le contenu d'où elle provint (donc l'objet Sam2 en entier)
     calcAgeFuture: function () {
         // Affichage pour mieux comprendre : this pointe vers celui qui appelle cette Method
@@ -132,6 +132,8 @@ let Sam2 = {
         return this.age;
     },
 
+//  ----------------------
+// Small Exercice
     // Ma solution en 6 lignes
     getSummary: function () {
         if (Sam2.hasDriversLicense) {
@@ -141,7 +143,7 @@ let Sam2 = {
         }
 
         return `${this.firstName} is a ${this.age} years old ${this.job}, and ${this.driving}`
-        return `${Sam2.firstName} is a ${Sam2.age} years old ${Sam2.job}, and ${Sam2.driving}`
+        // return `${Sam2.firstName} is a ${Sam2.age} years old ${Sam2.job}, and ${Sam2.driving}`
     },
 
     // Solution du Formateur en 2 lignes !
@@ -151,8 +153,9 @@ let Sam2 = {
         ;
     },
 };
+//  ----------------------
 
-// 2 manières de l'écrire (point ou crochets)
+// 2 manières d'écrire (point ou crochets)
 console.log(Sam2.calcAge(1983));
 console.log(Sam2["calcAge"](1983));
 
