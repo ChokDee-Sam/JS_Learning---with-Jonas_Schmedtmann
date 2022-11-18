@@ -32,3 +32,18 @@ for (let i = 0; i < bills.length; i++) {
 //
 
 console.log(total);
+
+// BONUS
+
+let sum = 0;
+console.log(sum);
+
+const calcAverage = function (arr) {
+    for (i = 0; i < arr.length; i++) {
+        console.log(`sum ${sum} + facture suivante ${arr[i]}`);
+        sum = sum + arr[i];
+        // sum += arr[i]
+    }
+    return sum / arr.length;
+};
+console.log(calcAverage(total));

@@ -86,6 +86,7 @@ for (let i = 0; i < Sam.length; i++) {
 // ------------------------//
 // CONTINUE
 // Ignore des types d'éléments dans la séquence de boucle
+// Stop l'itération actuelle, pour passer à la suivante
 // ------------------------//
 console.log("----- CONTINUE ------");
 
