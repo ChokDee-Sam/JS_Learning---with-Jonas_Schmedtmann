@@ -1,3 +1,19 @@
+// PROCESS
+
+// 1) Comprendre le problème
+// Créer une suite de contaténations, incluant des valeurs de tableaux, de boucles, et de texte
+// Faire en sorte que 0 Day n'existe pas
+// Day doit pouvoir être au singulier ou au pluriel, selon le contexte
+
+//  2) Diviser en sous-problèmes
+// Créer les tableaux
+// Créer une fonction
+// Créer une boucle de la longueur du paramètre de fonction
+// Y inclure une variable 'vide' (ou avec les 3 petits points)
+// Cette variable se remplira via la concaténation à chaque tours de boucle
+// Indexer [i]+1 pour retirer les 0 Day
+// Inclure une condition dans la String, pour le singulier/pluriel de Day
+// Après la boucle, afficher le résultat de l'ensemble des tours de boucles (les concaténations)
 
 let data1 = [17, 21, 23];
 let data2 = [12, 5, -5, 0, 4];
