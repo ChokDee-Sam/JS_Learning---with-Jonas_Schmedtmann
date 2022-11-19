@@ -8,7 +8,7 @@ const measureKelvin = function () {
 const measurement = {
   type : 'temp',
   unit: 'celcius',
-// -------------------- 2) FIX THE BUG --------------------
+// -------------------- 3) FIX THE BUG --------------------
 // On ajoute Number pour faire en sorte que le type soit bon
 value: Number(prompt('Degrees Celcius'))
 
