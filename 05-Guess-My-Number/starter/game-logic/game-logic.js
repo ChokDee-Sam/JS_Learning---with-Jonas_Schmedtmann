@@ -27,7 +27,11 @@ document.querySelector('.check').addEventListener('click', function () {
 
     // Si l'utilisateur entre le bon input
   } else if (guess === secretNumber) {
+    // Ajout / modification de CSS
     document.querySelector('main').style.backgroundColor = 'teal';
+    document.querySelector('main').style.transition = '.3s';
+    document.querySelector('.number').style.width = '100vw';
+    document.querySelector('.number').style.transition = '.9s';
     document.querySelector('.message').textContent = '🍕 Correct Number !';
 
     // Si input trop haut
