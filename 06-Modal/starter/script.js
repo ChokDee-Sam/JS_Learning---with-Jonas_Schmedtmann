@@ -29,3 +29,15 @@ for (let i = 0; i < btnsOpenModal.length; i++)
 // Enfin, on crée des Click Events ayant une fonction specifiquement créée
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
+
+// On va créer maintenant un Keyboard Event
+//      et on va afficher les informations de la key
+document.addEventListener('keydown', function (e) {
+  console.log(e.key);
+
+//   SI la key est echap ET que modal ne contient pas telle classe
+//      on call la fonction qui ferme tout
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+    closeModal();
+  }
+});
