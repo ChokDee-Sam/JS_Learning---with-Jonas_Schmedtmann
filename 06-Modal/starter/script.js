@@ -35,8 +35,8 @@ overlay.addEventListener('click', closeModal);
 document.addEventListener('keydown', function (e) {
   console.log(e.key);
 
-//   SI la key est echap ET que modal ne contient pas telle classe
-//      on call la fonction qui ferme tout
+  //   SI la key est echap ET que modal ne contient pas telle classe
+  //      on call la fonction qui ferme tout
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
     closeModal();
   }
