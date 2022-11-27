@@ -36,15 +36,39 @@ const btnNew = document.querySelector('.btn--new');
 // ---------------------------------------------
 // Starting conditions
 // ---------------------------------------------
+// Function initialization
+// ---------------------------------------------
 
-let currentScore = 0;
-score0El.textContent = 0;
-score1El.textContent = 0;
-const scores = [0, 0];
+let scores, currentScore, activePlayer, playing;
 
-diceEl.classList.add('hidden');
-let activePlayer = 0;
-let playing = true;
+const init = function () {
+  scores = [0, 0];
+  currentScore = 0;
+
+  activePlayer = 0;
+  playing = true;
+
+  // Reset Big Score
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+
+  // Reset Current Score
+  currentScore0El.textContent = 0;
+  currentScore1El.textContent = 0;
+
+  //   Hide Dice
+  diceEl.classList.add('hidden');
+
+  // Remove Player Winner
+  document.querySelector('.player--0').classList.remove('player--winner');
+  document.querySelector('.player--1').classList.remove('player--winner');
+
+  //   Reset background
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
+};
+
+init();
 
 // ---------------------------------------------
 // Function Switch Player
@@ -99,7 +123,7 @@ btnHold.addEventListener('click', function () {
     document.getElementById(`score--${activePlayer}`).textContent =
       scores[activePlayer]; //   Affichage du score actuel (total) grace au tableau
 
-    if (scores[activePlayer] >= 10) {
+    if (scores[activePlayer] >= 100) {
       playing = false;
       document
         .querySelector(`.player--${activePlayer}`)
@@ -112,3 +136,9 @@ btnHold.addEventListener('click', function () {
     }
   }
 });
+
+// ---------------------------------------------
+// CLICK EVENT : NEW GAME (reset)
+// ---------------------------------------------
+
+btnNew.addEventListener('click', init);
