@@ -15,13 +15,12 @@
 // ---------------------------------------------
 
 // Players
-const player0El = document.querySelector('.player--0')
-const player1El = document.querySelector('.player--1')
+const player0El = document.querySelector('.player--0');
+const player1El = document.querySelector('.player--1');
 
 // Scores
 let score0El = document.querySelector('#score--0');
 let score1El = document.getElementById('score--1');
-
 // Current Scores
 let currentScore0El = document.getElementById('current--0');
 let currentScore1El = document.getElementById('current--1');
@@ -38,55 +37,78 @@ const btnNew = document.querySelector('.btn--new');
 // Starting conditions
 // ---------------------------------------------
 
+let currentScore = 0;
 score0El.textContent = 0;
 score1El.textContent = 0;
-diceEl.classList.add('hidden');
-
 const scores = [0, 0];
-let currentScore = 0;
+
+diceEl.classList.add('hidden');
 let activePlayer = 0;
+let playing = true;
 
 // ---------------------------------------------
+// Function Switch Player
 // ---------------------------------------------
 
-// Création d'une fonction lors d'un Click Event
+const switchPlayer = function () {
+  document.getElementById(`current--${activePlayer}`).textContent = 0; //affiche zero dans Current
+  currentScore = 0; //stock zéro dabs Current
+  activePlayer = activePlayer === 0 ? 1 : 0; //change de joueur (= index des futurs tableaux de joueur)
+  player0El.classList.toggle('player--active');
+  player1El.classList.toggle('player--active'); //toggle le background du joueur actif
+};
+
+// ---------------------------------------------
+// CLICK EVENT : ROLL DICE
+// ---------------------------------------------
+// Generer un lancement de dé aléatoire > Afficher l'image du résultat du dé > Afficher le chiffre
+// Est-ce le chiffre 1 ?      // Oui = Changer de joueur      // Non = Ajouter le résultat du dé au Current
+// Afficher le cumule des chiffres dans le Current
+// ---------------------------------------------
+
 bntRoll.addEventListener('click', function () {
-  // 1. On génère un nombre rond aléatoire entre 1 et 6
-  const dice = Math.trunc(Math.random() * 6) + 1;
+  if (playing) {
+    const dice = Math.trunc(Math.random() * 6) + 1; // 1. On génère un nombre rond aléatoire entre 1 et 6
 
-  // 2. Afficher le dé
-  //   On retire la classe hidden
-  diceEl.classList.remove('hidden');
+    // 2. Afficher visuellement le dé
+    diceEl.classList.remove('hidden'); // On affiche l'image du dé en retirant la classe hidden qui le cachait
+    diceEl.src = `dice-${dice}.png`; //  On affiche l'image du dé dynamiquement grace à la variable 'dice'
 
-  //   On change la source de l'image du dé
-  //      en générant un lien dynamique selon le dé
-  diceEl.src = `dice-${dice}.png`;
+    // 3. On vérifie si le dé est 1
+    if (dice !== 1) {
+      currentScore += dice; // On STOCK le résultat du dé au score actuel
+      document.getElementById(`current--${activePlayer}`).textContent =
+        currentScore; // On AFFICHE ce résultat en injectant le score actuel dynamiquement (pour le joueur actuel)
+    } else {
+      diceEl.classList.add('hidden');
+      switchPlayer(); // Changer de joueur actif
+    }
+  }
+});
 
-  //   Et on assigne le résultat aléatoire du dé
-  //   qui sera affiché et contenu dans une var
-  score0El.textContent = dice;
+// ---------------------------------------------
+// CLICK EVENT : HOLD
+// ---------------------------------------------
+// Ajouter le score au joueur actif     // Verifier si le score est >= 100      // Terminer le jeu
+// ---------------------------------------------
 
-  // 3. On vérifie si le dé est 1
-//   Si le dé est autre chose que 1
-  if (dice !== 1) {
-    // On ajoute le résultat du dé au score actuel
-    currentScore += dice;
-    // On affiche ce résultat en injectant le score actuel
-    //      de manière dynamique au joueur actif actuellement
-    document.getElementById(`current--${activePlayer}`).textContent =
-      currentScore;
-    //   Sinon, si le résultat est 1
-  } else {
-    // On affiche le résultat actuel à zéro
-    document.getElementById(`current--${activePlayer}`).textContent = 0;
-    // On remet le score actuel pour effectuer les calculs à zéro
-    currentScore = 0;
-    // On change de joueur actif
-    activePlayer = activePlayer === 0 ? 1 : 0;
-    // On fait un Toggle d'une class
-    // Sur chaque player
-    // De ce fait, elle s'affichera qu'à un seul endroit à la fois
-    player0El.classList.toggle('player--active')
-    player1El.classList.toggle('player--active')
+btnHold.addEventListener('click', function () {
+  if (playing) {
+    diceEl.classList.add('hidden'); // On retire l'affichage du dé (avant le lancement)
+    scores[activePlayer] += currentScore; // Ajouter le score au joueur actif dans le tableau
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer]; //   Affichage du score actuel (total) grace au tableau
+
+    if (scores[activePlayer] >= 10) {
+      playing = false;
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+    } else {
+      switchPlayer(); // Changer de joueur actif
+    }
   }
 });
