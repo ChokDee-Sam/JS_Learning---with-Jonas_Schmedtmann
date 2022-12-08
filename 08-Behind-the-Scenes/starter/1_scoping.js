@@ -1,15 +1,15 @@
 'use strict';
 
+// La scope permet de chercher des infos vers l'exterieur, vers les parents
+// Mais JAMAIS vers l'intérieur, du parent vers l'enfant
+
+// Pour faire simple : on déclare pour les éléments enfants (ou pour sa propre scope)
+// Seulement 'var' possède une scope étendue pour envoyer l'info d'un étage vers son parent
+// MAIS il est très déconseillé de l'utiliser (sauf cas précis, comme ancien projet codé)
+
 // les variables globales sont toutes 'scannées' avant d'exécuter le code
 // Voilà pourquoi elles peuvent être disponibles avant même leur déclaration
 // Mais ne seront "Undefined"
-
-// La scope permet de trouver des infos vers l'intérieur, vers les enfants
-// Mais JAMAIS vers l'extérieur, de l'enfant vers les parents
-
-// Pour faire simple : on déclare pour les éléments enfants (ou pour sa propre scope)
-// Seulement var possède une scope étendue pour envoyer l'info d'un étage vers son parent
-// MAIS il est très déconseillé de l'utiliser (sauf cas précis, comme ancien projet codé)
 
 // Function Scope : leur propre bloc ( en strict mode, recommandé)
 
@@ -18,13 +18,11 @@ function calcAge(birthyear) {
   console.log(firstName); // sera recherché en dehors de la scope function
 
   function printAge() {
-    console.log(millenial); //pas d'erreur, car var à une scope étendue
+    console.log(millenial); //pas d'erreur, car var (ligne 46) à une scope étendue
 
     // Les infos ne sont pas dans cette scope
     // donc le programme ira chercher les infos dans les scopes parents
     let output = `${firstName}, you are ${age}, born in ${birthyear}`;
-    // La scope permet de léguer des infos parents vers les enfants (vers l'intérieur)
-    // Mais JAMAIS l'inverse, de l'enfant vers les parents (vers l'extérieur)
     console.log(output);
 
     if (birthyear >= 1900 && birthyear <= 1999) {
@@ -32,12 +30,14 @@ function calcAge(birthyear) {
       // Avant d'etendre la recherche dans les scopes parents, la recherche est locale
 
       // --- Création d'une nouvelle variable avec le même nom qu'une autre
-      // --- MAIS dans un scope différent
+      // --- MAIS dans un scope différente (parent)
       const firstName = 'ChokDee'; // donc changement prioritaire dans cette scope locale
+
       // Avoir 2 variables portant le même nom n'est pas un problème
       // Elles seront definis selon leur scope comme 2 variables différentes
 
       // Réassigner une variable créée dans une Scope Exterieure
+      // Ça semble bizarre (info enfant vers parent) mais c'est possible
       output = 'NEW OUTPUT';
 
       const str = `Oh, ${firstName}, you are a Millenial`;
@@ -49,7 +49,6 @@ function calcAge(birthyear) {
     console.log(output); //pas d'erreur, malgré sa réassignation dans une scope enfant
   }
   printAge();
-
   return age;
 }
 
