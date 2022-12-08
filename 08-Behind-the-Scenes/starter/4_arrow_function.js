@@ -81,11 +81,11 @@ piege_3.greet();
 //  FONCTION FLECHEE et SCOPE
 //  On va voir que les fonctions fléchées permettent de chercher leur parent
 //  Grace à sa plus grande Scope
-// 
-//  
-//  
-//  
-//  
+//
+//
+//
+//
+//
 
 // --------------------------------------------------------------------------
 // REGLE : Dans une méthode, si on crée une fonction et qu'on l'appelle : THIS = undefined
@@ -95,7 +95,6 @@ piege_3.greet();
 // Puis, dans la Method, on va créer une fonction expression pour "encore" appeler le 'this'
 // Mais comme ce sera un autre enfant, le 'this' sera "Undefined", à cause de son scope
 // Grossièrement, il faut remonter de 2 parents pour accéder au contenu du 'this'
-
 
 const firstExemple = {
   name: 'Method > Fonction Expression > this : Undefined',
@@ -116,7 +115,7 @@ const firstExemple = {
 firstExemple.calcAge();
 
 // --------------------------------------------------------------------------
-// SOLUTION PRÉ ES6 : 
+// SOLUTION PRÉ ES6 :
 // Créer un pont avec 'self' ou 'that'
 // --------------------------------------------------------------------------
 
@@ -177,39 +176,34 @@ troisiemeExemple.calcAge();
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
-//  FONCTION FLECHEE et ARGUMENTS
-//  On va voir que les fonctions fléchées ne permettent pas de les afficher
+//  FONCTION EXPRESSION / DECLARATION et ARGUMENTS
+//  Permet de stocker des arguments supplémentaires (sous forme de tableaux)
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 
-// const addFunctionExpression = function (a, b) {
-//   console.log(arguments);
-//   return a + b;
-// };
-// // addFunctionExpression(2, 2);
-// console.log(addFunctionExpression(2, 2));
-// console.log(addFunctionExpression(2, 2, 2, 2, 2));
-// // Affiche uniquement le résultats 2 premiers arguments
-// // Mais TOUS LES AUTRES arguments existent dans un array (tableau)
+const addFunctionExpression = function (a, b) {
+  console.log(arguments); // les arguments 'existent' sous forme de tableau
+  return a + b;
+};
 
-// // --------------------------------------------------------------------------
-
-// const addFunctionArrow = (a, b) => {
-//   //        Arguments existe mais ne s'affiche que dans les regular functions
-//   //        (fonction expression / Fonction declaration)
-//   // console.log(arguments);
-//   return a + b;
-// };
-// console.log(addFunctionArrow(10, 10));
-// console.log(addFunctionArrow(10, 10, 10, 10, 10));
-// // Affiche uniquement le résultats 2 premiers arguments
-// // Mais les arguments n'existent pas en console
-// // On obtient un message d'erreur si on souhaite les afficher
+// Affiche uniquement le résultats 2 premiers arguments
+console.log(addFunctionExpression(2, 2));
+// Mais TOUS LES AUTRES arguments existent dans un array (tableau)
+console.log(addFunctionExpression(2, 2, 2, 2, 2));
 
 // --------------------------------------------------------------------------
-// --------------------------------------------------------------------------
-//
-//
+
+const addFunctionArrow = (a, b) => {
+  // Arguments 'inexistants' en fonction flêchée 
+  // console.log(arguments); // erreur 'is not defined'
+  return a + b;
+};
+console.log(addFunctionArrow(10, 10));
+console.log(addFunctionArrow(10, 10, 10, 10, 10));
+// Affiche uniquement le résultats 2 premiers arguments
+// Mais les arguments n'existent pas en console
+// On obtient un message d'erreur si on souhaite les afficher
+
 // --------------------------------------------------------------------------
 // Bonnes pratiques
 // --------------------------------------------------------------------------
@@ -217,25 +211,10 @@ troisiemeExemple.calcAge();
 // --- Connaitre exactement les différents types de fonctions (par rapport au this)
 // ------ afin de déterminer celle qui sera la plus adaptée au besoin / contexte
 
-// Ne JAMAIS utiliser une fonction flêchée (Method) dans un objet
+// Ne JAMAIS utiliser une fonction flêchée (Method) dans un objet (sauf si besoin particulier??)
 // En d'autre termes : pas de fonction flêchée pour créer une Method !!
 
-// --- Et pour éviter les erreurs : ne pas utiliser de this dans une Method particulière
-// ------ Parce que si on a cette règle de ne jamais utiliser de fonction flêchée en tant que
-// ------ Method, alors on aura pas à penser à quel type de fonction utiliser
-
-// --- Toujours utiliser une fonction d'expression normale
+// --- Toujours utiliser une fonction d'expression régulière
 // ------ pour éviter de produire ce genre d'erreur
 
-// --- Passer de ça : fonction flêchée
-//                greet: () => console.log(`Hey ${this.name}`)
-
-// À ça : fonction régulière
-//                greet: function () {
-//                  console.log(`Hey ${this.name}`)
-//                  }
-
 // --- Ne pas utiliser de 'var'
-
-// Quelle que soit la fonction (flêchée, )
-// 5:48 secondes : à complèter...
