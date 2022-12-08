@@ -23,13 +23,13 @@ const piege_1 = {
 };
 
 piege_1.greet();
-console.log(this.name); // rien ne s'affiche dans la console (juste un espace vide)
+console.log(`Voici le this.name : ${this.name}`); // rien ne s'affiche dans la console (juste un espace vide)
 
 // --------------------------------------------------------------------------
 // Le piège de la Fonction Flêchée + this + 'var'
 // --------------------------------------------------------------------------
 
-// --- En activant cette ligne
+// --- En activant la ligne 36
 // ------ Un 'this' d'une fonction flêchée trouvera cette info Parent et l'utilisera
 // ------ Ce qui créera un bug chez nous, car on ne voulait pas cette Scope
 // ------ Nous savons qu'une 'var' créera sa propriété sur l'Objet Global (Window)
@@ -45,12 +45,12 @@ const piege_2 = {
   },
 
   greet: () => console.log(`Hey ${this.name}`), // n'affiche pas le 'this.name' !!
-  // SAUF si on active la variable ligne 33
+  // SAUF si on active la variable ligne 36
 };
 
 piege_2.greet();
 console.log(this.name); // rien ne s'affiche dans la console (juste un espace vide)
-// SAUF si on active la variable ligne 33
+// SAUF si on active la variable ligne 36
 
 // --------------------------------------------------------------------------
 // La Solution pour éviter ces pièges
@@ -61,7 +61,7 @@ console.log(this.name); // rien ne s'affiche dans la console (juste un espace vi
 
 const piege_3 = {
   name: 'Joe',
-  year: 42,
+  year: 1942,
 
   calcAge: function () {
     console.log(this);
@@ -81,15 +81,24 @@ piege_3.greet();
 //  FONCTION FLECHEE et SCOPE
 //  On va voir que les fonctions fléchées permettent de chercher leur parent
 //  Grace à sa plus grande Scope
+// 
+//  
+//  
+//  
+//  
+
 // --------------------------------------------------------------------------
+// REGLE : Dans une méthode, si on crée une fonction et qu'on l'appelle : THIS = undefined
 // --------------------------------------------------------------------------
 
-// Dans ce 1er exemple, on va utiliser le this dans une Method
-// Puis on va créer une fonction expression pour appeler encore le this
-// Mais comme ce sera un autre enfant, le this sera "Undefined", à cause de son scope
+// Dans ce 1er exemple, on va utiliser le 'this' dans une Method
+// Puis, dans la Method, on va créer une fonction expression pour "encore" appeler le 'this'
+// Mais comme ce sera un autre enfant, le 'this' sera "Undefined", à cause de son scope
+// Grossièrement, il faut remonter de 2 parents pour accéder au contenu du 'this'
+
 
 const firstExemple = {
-  name: 'Sam',
+  name: 'Method > Fonction Expression > this : Undefined',
   year: 1983,
 
   calcAge: function () {
@@ -107,14 +116,17 @@ const firstExemple = {
 firstExemple.calcAge();
 
 // --------------------------------------------------------------------------
+// SOLUTION PRÉ ES6 : 
+// Créer un pont avec 'self' ou 'that'
+// --------------------------------------------------------------------------
 
 // Dans ce 2eme exemple, on va faire la même chose que dans l'exemple précédent
 // Sauf qu'on va créer une sorte de pont, entre le bloc parent et enfant
-// afin que le this ne soit pas "Undefined" (donc défini) grace à un Scope plus grand
-// C'est une solution pré-ES6
+// afin que le this ne soit pas "Undefined", grace à un Scope plus grand
+// C'est une solution pré-ES6 ()
 
 const secondExemple = {
-  name: 'Sam',
+  name: 'Pré ES6 : Self ou That',
   year: 1983,
 
   calcAge: function () {
@@ -128,7 +140,7 @@ const secondExemple = {
     const otherCentury = function () {
       console.log(self);
       //   On peut donc utiliser le boolean avec les bonnes infos définies
-      //   En utilisant le scope du 'self' et non pas du 'this'
+      //   En utilisant le scope du parent avec 'self' (et non pas 'this')
       console.log(self.year >= 1900 && self.year <= 1999);
     };
     otherCentury();
@@ -137,13 +149,15 @@ const secondExemple = {
 secondExemple.calcAge();
 
 // --------------------------------------------------------------------------
+// SOLUTION MODERNE ES6 :
+// La fonction flêchée n'a pas son propre 'this'
+// Elle va donc remonter chercher l'info jusqu'à une Scope Parent
+// --------------------------------------------------------------------------
 
-// Dans ce 3eme exemple, on va utiliser une fonction fléchée
-// Elle ira chercher son parent (même lointain ???)
-// C'est une solution ES6
+// Donc, une fonction flêchée héritera toujours du 'this' d'une Scope Parent
 
 const troisiemeExemple = {
-  name: 'Sam',
+  name: 'ES6 : la fonction flêchée',
   year: 1983,
 
   calcAge: function () {
@@ -199,6 +213,9 @@ troisiemeExemple.calcAge();
 // --------------------------------------------------------------------------
 // Bonnes pratiques
 // --------------------------------------------------------------------------
+
+// --- Connaitre exactement les différents types de fonctions (par rapport au this)
+// ------ afin de déterminer celle qui sera la plus adaptée au besoin / contexte
 
 // Ne JAMAIS utiliser une fonction flêchée (Method) dans un objet
 // En d'autre termes : pas de fonction flêchée pour créer une Method !!
