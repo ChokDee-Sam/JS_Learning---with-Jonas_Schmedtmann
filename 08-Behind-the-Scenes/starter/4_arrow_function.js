@@ -1,6 +1,16 @@
 'use strict';
 
 // --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
+//       LES 2 GRANDS PIÈGES DU 'THIS'    + LA SOLUTION
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// REGLE : Une fonction flêchée ne possède pas son propre 'this'
+//         De ce fait, le contenu du 'this' sera vide
+//         (même s'il cherchera l'info dans une scope parent)
+// --------------------------------------------------------------------------
+// 
+// --------------------------------------------------------------------------
 // Le piège de la Fonction Flêchée + this : valeur inexistante
 // --------------------------------------------------------------------------
 
@@ -18,7 +28,7 @@ const piege_1 = {
 
   greet: () => {
     console.log(this);
-    console.log(`Hey ${this.name}`); // n'affiche pas le 'this.name' !!
+    console.log(`Hey ${this.name}`); // n'affiche pas le 'this.name'
   },
 };
 
@@ -26,15 +36,20 @@ piege_1.greet();
 console.log(`Voici le this.name : ${this.name}`); // rien ne s'affiche dans la console (juste un espace vide)
 
 // --------------------------------------------------------------------------
-// Le piège de la Fonction Flêchée + this + 'var'
+// Le piège de la Fonction Flêchée + this + 'var' ayant le même nom
 // --------------------------------------------------------------------------
-
+// --------------------------------------------------------------------------
+// REGLE : Une fonction flêchée ne possède pas son propre 'this'
+//         De ce fait, le contenu du 'this' sera vide
+//         Il va remonter chercher l'information chez un parent avec 'var' portant le même nom
+// --------------------------------------------------------------------------
+// 
 // --- En activant la ligne 36
 // ------ Un 'this' d'une fonction flêchée trouvera cette info Parent et l'utilisera
-// ------ Ce qui créera un bug chez nous, car on ne voulait pas cette Scope
+// ------ Ce qui créera un bug chez nous, car on ne voulait pas de cette Scope avec Var
 // ------ Nous savons qu'une 'var' créera sa propriété sur l'Objet Global (Window)
-// var name = 'Sam';
 
+// var name = 'Sam';
 const piege_2 = {
   name: 'Sam',
   year: 1983,
@@ -78,17 +93,15 @@ piege_3.greet();
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
-//  FONCTION FLECHEE et SCOPE
-//  On va voir que les fonctions fléchées permettent de chercher leur parent
-//  Grace à sa plus grande Scope
-//
-//
-//
-//
-//
-
+//      GÉRER LE 'THIS' dans une FONCTION, elle-même dans une METHOD
+//              OBJET > FONCTION (METHOD) > FONCTION > THIS
+// --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 // REGLE : Dans une méthode, si on crée une fonction et qu'on l'appelle : THIS = undefined
+//          Il faudra :
+//            - soit créer "artificiellement" un parent contenant l'information pour le 'this'
+//            - soit créer une fonction flêchée qui, de nature, ira chercher le parent pour le 'this'
+// --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 
 // Dans ce 1er exemple, on va utiliser le 'this' dans une Method
