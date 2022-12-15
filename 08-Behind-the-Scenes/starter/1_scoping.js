@@ -4,21 +4,21 @@
 // Mais JAMAIS vers l'intérieur, du parent vers l'enfant
 
 // Pour faire simple : on déclare pour les éléments enfants (ou pour sa propre scope)
-// Seulement 'var' possède une scope étendue pour envoyer l'info d'un étage vers son parent
-// MAIS il est très déconseillé de l'utiliser (sauf cas précis, comme ancien projet codé)
+// Seulement 'var' possède une scope étendue pour envoyer l'info d'un étage enfant vers son parent
+// MAIS il est très déconseillé de l'utiliser (sauf cas précis, comme un ancien projet codé)
 
-// les variables globales sont toutes 'scannées' avant d'exécuter le code
-// Voilà pourquoi elles peuvent être disponibles avant même leur déclaration
-// Mais ne seront "Undefined"
+// les variables globales sont toutes 'scannées' AVANT que chaque ligne de code soit effectuée
+// Voilà pourquoi elles peuvent être disponibles AVANT même leur déclaration
+// Mais seront "Undefined"
 
 // Function Scope : leur propre bloc ( en strict mode, recommandé)
 
 function calcAge(birthyear) {
   const age = 2022 - birthyear;
-  console.log(firstName); // sera recherché en dehors de la scope function
+  console.log(firstName); // sera recherché en dehors de la scope function (dans une scope globale, donc dispo)
 
   function printAge() {
-    console.log(millenial); //pas d'erreur, car var (ligne 46) à une scope étendue
+    console.log(millenial); //pas d'erreur, car cette var (ligne 48) à une scope étendue (donc UNDEFINED)
 
     // Les infos ne sont pas dans cette scope
     // donc le programme ira chercher les infos dans les scopes parents

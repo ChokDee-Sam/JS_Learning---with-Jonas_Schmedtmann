@@ -3,7 +3,7 @@
 // let et const sont dans un TDZ
 // du début de la Scope. jusqu'à leur déclaration
 
-console.log(me); // cette 'var' existera, mais sera 'Undefined'
+console.log(me); // cette 'var' est declaré après, elle sera donc 'Undefined'
 // console.log(job); // erreur, car 'let'
 // console.log(year); // erreur, car 'const'
 
@@ -19,7 +19,7 @@ const year = 1983;
 // ------ c'est d'utiliser une fonction Déclarative
 
 console.log(addDeclarative(2, 3)); // OK (car pas dans une variable)
-// console.log(addExpressive(2, 3)); // erreur d'initialisation (car CONST)
+// console.log(addExpressive(2, 3)); // erreur d'initialisation (car LET)
 // console.log(addFlechee(2, 3)); // erreur d'initialisation (car CONST)
 
 // --- Cette fonction est Déclarative
@@ -30,7 +30,7 @@ function addDeclarative(a, b) {
 
 // --- Cette fonction est créée avec une Const
 // ------ elle est donc dans une TDZ jusqu'à son initialisation
-const addExpressive = function (a, b) {
+let addExpressive = function (a, b) {
   return a + b;
 };
 
@@ -66,7 +66,7 @@ console.log(addExpressive2(5, 5));
 console.log(numberProducts); // Undefined
 if (!numberProducts) deleteShoppingCart(); //Fonctionnera car 'Undefined'
 
-var numberProducts = 100;
+var numberProducts = 100; // existera avant sa déclaration, en 'Undefined'
 
 function deleteShoppingCart() {
   console.log('All products deleted !');
@@ -97,7 +97,7 @@ console.log(window); // 'x' sera affiché dans l'objet
 // ------ Utiliser 'Const', ou bien 'Let' en cas de réassignation
 // ------ Ne pas utiliser de 'Var'
 
-// --- Déclarer ses fontions, avant de les utiliser
+// --- Déclarer ses fontions, avant toute utilisation
 // ------ pour ensuite les appeler
 
 // --- On peut, techniquement, appeler une fonction avant sa déclaration

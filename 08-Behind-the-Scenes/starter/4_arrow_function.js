@@ -44,12 +44,13 @@ console.log(`Voici le this.name : ${this.name}`); // rien ne s'affiche dans la c
 //         Il va remonter chercher l'information chez un parent avec 'var' portant le même nom
 // --------------------------------------------------------------------------
 // 
-// --- En activant la ligne 36
-// ------ Un 'this' d'une fonction flêchée trouvera cette info Parent et l'utilisera
+// --- En activant la ligne 53,
+// ------ Un 'this' d'une fonction flêchée trouvera cette info Parent 'var' et l'utilisera
+// ------ De ce fait, tous les lignes avec un 'this' qui pointent vers 'rien' changeront
 // ------ Ce qui créera un bug chez nous, car on ne voulait pas de cette Scope avec Var
 // ------ Nous savons qu'une 'var' créera sa propriété sur l'Objet Global (Window)
 
-// var name = 'Sam';
+// var name = 'Sam'; // attention au cache du navigateur pour revenir à l'état initial
 const piege_2 = {
   name: 'Sam',
   year: 1983,
@@ -60,12 +61,12 @@ const piege_2 = {
   },
 
   greet: () => console.log(`Hey ${this.name}`), // n'affiche pas le 'this.name' !!
-  // SAUF si on active la variable ligne 36
+  // SAUF si on active la variable ligne 53
 };
 
 piege_2.greet();
 console.log(this.name); // rien ne s'affiche dans la console (juste un espace vide)
-// SAUF si on active la variable ligne 36
+// SAUF si on active la variable ligne 53
 
 // --------------------------------------------------------------------------
 // La Solution pour éviter ces pièges
@@ -89,6 +90,7 @@ const piege_3 = {
   },
 };
 
+piege_3.calcAge();
 piege_3.greet();
 
 // --------------------------------------------------------------------------
@@ -100,7 +102,7 @@ piege_3.greet();
 // REGLE : Dans une méthode, si on crée une fonction et qu'on l'appelle : THIS = undefined
 //          Il faudra :
 //            - soit créer "artificiellement" un parent contenant l'information pour le 'this'
-//            - soit créer une fonction flêchée qui, de nature, ira chercher le parent pour le 'this'
+//            - soit créer une fonction flêchée qui remontera chercher un parent pour le 'this'
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 
@@ -115,7 +117,7 @@ const firstExemple = {
 
   calcAge: function () {
     console.log(this);
-    console.log(2022 - this.year);
+    console.log(2022 - this.year); // Affiche l'âge correctement
 
     const otherCentury = function () {
       console.log(this); //undefined
@@ -125,7 +127,7 @@ const firstExemple = {
     otherCentury();
   },
 };
-firstExemple.calcAge();
+firstExemple.calcAge(); // va afficher le this (const) + l'age + 'Undefined'
 
 // --------------------------------------------------------------------------
 // SOLUTION PRÉ ES6 :
@@ -221,13 +223,13 @@ console.log(addFunctionArrow(10, 10, 10, 10, 10));
 // Bonnes pratiques
 // --------------------------------------------------------------------------
 
-// --- Connaitre exactement les différents types de fonctions (par rapport au this)
-// ------ afin de déterminer celle qui sera la plus adaptée au besoin / contexte
+// // --- Connaitre exactement les différents types de fonctions (par rapport au this)
+// // ------ afin de déterminer celle qui sera la plus adaptée au besoin / contexte
 
-// Ne JAMAIS utiliser une fonction flêchée (Method) dans un objet (sauf si besoin particulier??)
-// En d'autre termes : pas de fonction flêchée pour créer une Method !!
+// // Ne JAMAIS utiliser une fonction flêchée (Method) dans un objet (sauf si besoin particulier??)
+// // En d'autre termes : pas de fonction flêchée pour créer une Method !!
 
-// --- Toujours utiliser une fonction d'expression régulière
-// ------ pour éviter de produire ce genre d'erreur
+// // --- Toujours utiliser une fonction d'expression régulière
+// // ------ pour éviter de produire ce genre d'erreur
 
-// --- Ne pas utiliser de 'var'
+// // --- Ne pas utiliser de 'var'

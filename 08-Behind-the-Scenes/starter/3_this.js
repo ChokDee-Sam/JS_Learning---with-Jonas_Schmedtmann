@@ -10,7 +10,7 @@
 
 // --- Le THIS prend la valeur du "propriétaire de la fonction"
 // ------ dans laquelle il est utilisé
-//  Grossièrement, on peut dire qu'il pointe vers le propriétaire de fonction
+//  Grossièrement, on peut dire qu'il 'pointe' vers le propriétaire de fonction
 
 // --- De ce fait, il n'est pas Statique, mais Dynamique (car contextuel)
 
@@ -34,7 +34,7 @@ console.log(sam.calcAge());
 // -------------------------------------------------
 
 // 2 - Simple Function Call
-// ------ this = undefined  (en mode strict ! Sinon Window)
+// ------ this = undefined  (en mode strict ! Sinon pointe vers Window)
 
 // -------------------------------------------------
 
