@@ -86,12 +86,12 @@ const jessica = {
 };
 
 const marriedJessica = jessica; // Copie la référence qui pointe sur le même objet
-marriedJessica.lastName = 'Winter'
+marriedJessica.lastName = 'Winter';
 
- console.log('before marriage : ', jessica);
- console.log('after marriage : ', marriedJessica);
+console.log('before marriage : ', jessica);
+console.log('after marriage : ', marriedJessica);
 
-// 'marriedJessica' est dans une const (qui est sensé ne pas changer)
+// 'marriedJessica' est dans une const (qui est sensée ne pas changer)
 // Mais ce qui ne change pas, c'est sa valeur dans la Stack
 // Et cette valeur, c'est sa référence dans la Heap (donc l'objet)
 // En modifiant l'objet dans la Heap, on ne change donc pas la valeur de la Stack
