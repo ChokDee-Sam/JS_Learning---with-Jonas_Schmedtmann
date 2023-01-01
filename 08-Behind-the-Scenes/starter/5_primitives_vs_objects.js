@@ -67,7 +67,7 @@ console.log('Friend', friend);
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 
-console.log(`Now, let's practice !!`);
+console.log(`---------- Now, let's practice !! ----------`);
 
 // --- Exemple de copie avec des Valeurs Primitives (des variables)
 // --- Aucun soucis, car la mémoire se situe dans le CallStack
@@ -81,17 +81,51 @@ console.log(oldLastName);
 // --- Exemple de copie avec des Valeurs Références (des objets)
 const jessica = {
   firstName: 'Jessica',
-  lastName: 'Summer',
+  lastName: 'Willams',
   age: 40,
 };
 
 const marriedJessica = jessica; // Copie la référence qui pointe sur le même objet
-marriedJessica.lastName = 'Winter';
+marriedJessica.lastName = 'Davis';
 
 console.log('before marriage : ', jessica);
 console.log('after marriage : ', marriedJessica);
 
-// 'marriedJessica' est dans une const (qui est sensée ne pas changer)
+// 'marriedJessica' est dans une 'const' (qui est sensée ne pas changer)
 // Mais ce qui ne change pas, c'est sa valeur dans la Stack
 // Et cette valeur, c'est sa référence dans la Heap (donc l'objet)
 // En modifiant l'objet dans la Heap, on ne change donc pas la valeur de la Stack
+// Et donc, on ne modifie pas la 'const'
+
+// marriedJessica = {} // erreur, car ce nouvel objet sera stocké ailleurs (donc autre adresse)
+// Nous ne pouvons pas assigner un objet completement différent
+// C'est à dire à une adresse différente dans la Heap
+// Car ce serait vouloir modifier une 'constante' qui possède la référence pointant dessus
+
+// Pour cela, il aura fallu une variable 'let'
+// Il y a une énorme différence entre modifier une propriété d'objet et assigner un nouvel objet
+
+console.log(`---------- Now, let's merge !! ----------`);
+
+const jessica2 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: ['Alice', 'Bob'], // Objet pour le dernier exemple
+};
+
+// Merge l'ensemble en créant un nouvel objet (où toutes les propriétés sont copiées)
+const jessicaCopy = Object.assign({}, jessica2);
+jessicaCopy.lastName = 'Davis';
+console.log('before marriage : ', jessica2);
+console.log('after marriage : ', jessicaCopy);
+
+// Ceci est une copie superficielle, car cela copie uniquement les propriétés du "Premier Niveau"
+// Car s'il y a un objet dans un objet, par exemple un tableau, ça serait le même emplacement mémoire
+
+jessicaCopy.family.push('Enfant_1');
+jessicaCopy.family.push('Enfant_2');
+console.log('before marriage : ', jessica2);
+console.log('after marriage : ', jessicaCopy);
+
+// On verra ça plus tard, car c'est beaucoup plus complexe
